@@ -16,28 +16,19 @@ small task using laravel 12 contain store and index for tasks table
 
 ## 📦 Features
 
-- Custom Event content entity with the following attributes:
-  - Title
-  - Image
-  - Description
-  - Start time
-  - End time (with validation)
-  - Category (taxonomy or dropdown)
-- Admin CRUD UI for managing events
-- Config page with:
-  - Toggle to show/hide past events
-  - Option to limit number of events on listing page
-- Logs configuration changes to a custom database table
-- Front-end:
-
+- Store Task:
+  - title
+  - description
+  - Status
+  - priority
+- List Tasks:
+  - with caching if exists
+  - with filtering using indexed columns ('status', 'priority') 
+- Feature Test Cases:
+- using Service Repo coding pattern:
 ## 📦 Documentation
-  - Event Modlue config /admin/config/events-manager
-  - Event listing page /admin/events
-  - Event details page /admin/events/{event}/show
-  - Event create page /admin/events/add
-  - Event delete link /admin/events/{event}/delete
-  - Event update page /admin/events/{event}/edit
-
+  - /api/tasks (post)
+  - /api/tasks (get) query params('status', 'priority') 
 ---
 
 ## 🛠 Installation Steps
@@ -51,36 +42,25 @@ git clone https://github.com/mohamedebrahim2020/events_management.git
 ```bash
 composer install
 ```
-### 3. create table called events (with its attributes)
-
-### 4. download project from drupal ui browser and define database
-
-### 5. download cacert.pem file and put it int php/extras/ssl
-
-### 6. add the following configuration to httpd-vhosts.conf
+### 3. migrate database
 ```bash
-<VirtualHost *:80>
-    ServerName events.local
-    DocumentRoot "C:/Users/Public/tasks/events_project/web"
-
-    <Directory "C:/Users/Public/tasks/events_project/web">
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
+php artisan migrate
 ```
-### 7 . allow or include httpd-vhosts.conf in httpd.conf
+### 4. run feature tests
 ```bash
-# Virtual hosts
-# Include conf/extra/httpd-vhosts.conf // remove # from this
+php artisan test
 ```
-
-### 8. start apache server 
+### 5. try swagger or postman for store and index tasks after queue operating using
 ```bash
-httpd
+php artisan queue:work
 ```
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📦 Task Time Details
+- API Design:
+  - 2 hrs
+- Implementation:
+  - 4 hrs
+- Database Optimization &implementation:
+  - 2 hrs
 
 ## License
 
