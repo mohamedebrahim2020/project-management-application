@@ -9,7 +9,9 @@
 
 # Project Management Application
 
-The **Project Management Application** small task using laravel 12 contain store and index for tasks table
+The **Project Management Application** 
+small task using laravel 12 contain store and index for tasks table
+
 ---
 
 ## 📦 Features
