@@ -7,10 +7,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# Events Management Module
+# Project Management Application
 
-The **Events Management** module is a custom Drupal 10 module that allows site administrators to create, manage, and display events on both the back-end and front-end. It also provides a configurable interface and logging for configuration changes.
-
+The **Project Management Application** small task using laravel 12 contain store and index for tasks table
 ---
 
 ## 📦 Features
