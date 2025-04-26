@@ -47,16 +47,21 @@
 		{
 			ini_set('memory_limit', '512M');
 
-			// Seed 3000git  tasks with random status
+			// Remove index if it exists
+			Schema::table('tasks', function ($table) {
+				$table->dropIndex(['status']);
+			});
+
+			// Seed 3000  tasks with random status
 			Task::factory()->count(3000)->create();
 
 			$start = microtime(true);
 			$this->getJson(route(self::INDEX_TASK_ROUTE, ['status' => 1]));
 			$durationWithIndex = microtime(true) - $start;
 
-			// Remove index if it exists
+			// Add index if it exists
 			Schema::table('tasks', function ($table) {
-				$table->dropIndex(['status']);
+				$table->index(['status']);
 			});
 			$start = microtime(true);
 			$this->getJson(route(self::INDEX_TASK_ROUTE, ['status' => 1]));
@@ -69,20 +74,24 @@
 		 */
 		public function test_index_task_database_priority_indexing_performance(): void
 		{
+			// Remove index if it exists
+			Schema::table('tasks', function ($table) {
+				$table->dropIndex(['priority']);
+			});
 			// Seed 3000 tasks with random status
 			Task::factory()->count(3000)->create();
 
 			$start = microtime(true);
 			$this->getJson(route(self::INDEX_TASK_ROUTE, ['priority' => 1]));
-			$durationWithIndex = microtime(true) - $start;
+			$durationWithoutIndex = microtime(true) - $start;
 
-			// Remove index if it exists
+			// Add index if it exists
 			Schema::table('tasks', function ($table) {
-				$table->dropIndex(['priority']);
+				$table->index(['priority']);
 			});
 			$start = microtime(true);
 			$this->getJson(route(self::INDEX_TASK_ROUTE, ['priority' => 1]));
-			$durationWithoutIndex = microtime(true) - $start;
+			$durationWithIndex = microtime(true) - $start;
 			$this->assertGreaterThan($durationWithoutIndex, $durationWithIndex);
 		}
 	}
