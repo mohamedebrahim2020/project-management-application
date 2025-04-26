@@ -7,52 +7,77 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# Events Management Module
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The **Events Management** module is a custom Drupal 10 module that allows site administrators to create, manage, and display events on both the back-end and front-end. It also provides a configurable interface and logging for configuration changes.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📦 Features
 
-## Learning Laravel
+- Custom Event content entity with the following attributes:
+  - Title
+  - Image
+  - Description
+  - Start time
+  - End time (with validation)
+  - Category (taxonomy or dropdown)
+- Admin CRUD UI for managing events
+- Config page with:
+  - Toggle to show/hide past events
+  - Option to limit number of events on listing page
+- Logs configuration changes to a custom database table
+- Front-end:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 📦 Documentation
+  - Event Modlue config /admin/config/events-manager
+  - Event listing page /admin/events
+  - Event details page /admin/events/{event}/show
+  - Event create page /admin/events/add
+  - Event delete link /admin/events/{event}/delete
+  - Event update page /admin/events/{event}/edit
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠 Installation Steps
 
-## Laravel Sponsors
+### 1. Clone the repository
+```bash
+git clone https://github.com/mohamedebrahim2020/events_management.git
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. install project
+```bash
+composer install
+```
+### 3. create table called events (with its attributes)
 
-### Premium Partners
+### 4. download project from drupal ui browser and define database
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+### 5. download cacert.pem file and put it int php/extras/ssl
 
-## Contributing
+### 6. add the following configuration to httpd-vhosts.conf
+```bash
+<VirtualHost *:80>
+    ServerName events.local
+    DocumentRoot "C:/Users/Public/tasks/events_project/web"
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    <Directory "C:/Users/Public/tasks/events_project/web">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+### 7 . allow or include httpd-vhosts.conf in httpd.conf
+```bash
+# Virtual hosts
+# Include conf/extra/httpd-vhosts.conf // remove # from this
+```
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
+### 8. start apache server 
+```bash
+httpd
+```
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
